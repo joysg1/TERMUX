@@ -1,5 +1,9 @@
 ++ pkg update (Actualizar repositorios)
 
+++ pkg upgrade (Actualizar paquetes)
+
 ++ pkg install <nombre_paquete> (Instalar un paquete)
+
+++ pkg uninstall <nombre_paquete> (Desinstalar un paquete)
 
 ++ pkg search <nombre_paquete> (Busca un paquete, ejemplo: git)
