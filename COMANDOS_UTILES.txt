@@ -9,3 +9,5 @@
 ++ pkg uninstall <nombre_paquete> (Desinstalar un paquete)
 
 ++ pkg search <nombre_paquete> (Busca un paquete, ejemplo: git)
+
+++ pkg install sl (Permite instalar el paquete sl, un pequeño programa de prueba)
