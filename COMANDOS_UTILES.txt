@@ -2,6 +2,8 @@
 
 ++ pkg upgrade (Actualizar paquetes)
 
+++ apt update && apt upgrade (Permite actualizar los repositorios y los paquetes)
+
 ++ pkg install <nombre_paquete> (Instalar un paquete)
 
 ++ pkg uninstall <nombre_paquete> (Desinstalar un paquete)
