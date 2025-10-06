@@ -11,3 +11,6 @@
 ++ pkg search <nombre_paquete> (Busca un paquete, ejemplo: git)
 
 ++ pkg install sl (Permite instalar el paquete sl, un pequeño programa de prueba)
+
+++ pkg install cmatrix (Permite instalar el paquete cmatrix, otro programa de prueba)
+
