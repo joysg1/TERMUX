@@ -47,6 +47,15 @@
 
 ++ pkg install nmap
 
+++ git clone https://github.com/gameye98/owscan
+--- ls
+--- cd <directorio>
+--- chmod +x owscan.php
+--- php owscan.php 
+--- Ingresar la url a escanear
+--- Se mostrará toda la información relacionada a la url (traceroute, puertos abiertos, whois, zone transfer)
+
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
