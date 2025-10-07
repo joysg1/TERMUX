@@ -48,6 +48,17 @@
 ++ pkg install nmap
 
 
+++ Instalar herramienta wafw00f (Para detectar presencia de firewalls que protegen un sitio web)
+--- pip install wafw00f
+--- URL: https://github.com/EnableSecurity/wafw00f
+--- wafwoof -l (Lista todos los firewalls capaces de ser detectados)
+--- wafwoof <url> 
+--- Nos aparecerá el firewall asociado al url
+
+
+
+
+
 ++ Instalar herramineta RED_HAWK (Herramienta de escaneo de vulnerabilidades)
 --- URL: https://github.com/Tuhinshubhra/RED_HAWK
 --- cd <directorio>
