@@ -47,7 +47,9 @@
 
 ++ pkg install nmap
 
-++ git clone https://github.com/gameye98/owscan
+
+++ Instalar herramienta OWSCAN
+--- git clone https://github.com/gameye98/owscan
 --- ls
 --- cd <directorio>
 --- chmod +x owscan.php
