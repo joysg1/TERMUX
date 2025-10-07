@@ -27,6 +27,26 @@
 --- Usuar la ip dada en un navegador para acceder al servidor apache
 ---- Ejemplo: 192.168.2.55:8080 
 
+++ pkg install python
+--- python --version
+--- pkg install python2  ----> Versión también recomendada para iniciar algunos scripts
+--- python2 --version
+
+++ pkg install php 
+-- php --version
+
+++ pkg install perl
+-- perl --version
+
+++ pkg istall ruby
+-- ruby --version
+
+++ pkg install clang ---> (Permite instalar C y C++)
+
+++ pkg install git 
+
+++ pkg install nmap
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
