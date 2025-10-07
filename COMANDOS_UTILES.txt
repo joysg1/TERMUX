@@ -58,6 +58,23 @@
 --- Se mostrará toda la información relacionada a la url (traceroute, puertos abiertos, whois, zone transfer)
 
 
+++ Instalar herramienta httrack 
+--- git clone https://github.com/Hax4us/httrack_In_termux
+--- ls
+--- cd <directorio>
+--- chmod +x httrack
+--- pkg install httrack
+--- httrack
+--- Ingresar un nombre para el proyecto
+--- Enter
+--- Ingresar la url del sitio web
+--- Escojer la opción 1 (Mirror Web Site)
+--- Escojer las opciones siguientes según se quiera
+--- Enter
+--- Esperar que se realice el clonado del sitio web
+
+
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
