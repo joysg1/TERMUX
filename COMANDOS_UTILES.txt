@@ -73,6 +73,9 @@
 --- Enter
 --- Esperar que se realice el clonado del sitio web
 
+++ Instalar herramienta NsLookUp 
+--- pkg install dnsutils 
+--- nslookup <url_sitio> ---> Permite conocer la ip del sitio 
 
 
 ++ pkg install termux-api (Instalar API y probarla)
