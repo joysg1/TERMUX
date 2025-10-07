@@ -55,7 +55,8 @@
 --- php rhawk.php
 --- Ingresar la url a escanear:
 --- Escojer la opción http (1) o https (2)
---- Escojer la opción 1 (basic recon)
+--- Escojer la opción 0 (basic recon)
+--- A continuación se nos mostrará la información del sitio web
 
 
 
