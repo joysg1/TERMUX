@@ -48,15 +48,27 @@
 ++ pkg install nmap
 
 
+++ Instalar herramienta lazymux (Permite instalar otras herramientas como: metasploit, sqlmap, nmap, etc)
+--- URL: https://github.com/Gameye98/Lazymux
+--- cd <directorio>
+--- chmod +x lazymux.py
+--- python lazymux.py
+--- Escojer entre las opciones
+--- Ejemplo: opción (1) Information Gathering
+--- Seleccionar una herramienta o ir al menú anterior ingresando: 00
+--- Opción (3) Web Hacking Tool
+--- Seleccionar una herramienta o ir al menú anterior ingresando: 00
+--- Opción (8) Exploitation Tools
+--- Seleccionar una herramienta o ir al menú anterior ingresando: 00
+
+
+
 ++ Instalar herramienta wafw00f (Para detectar presencia de firewalls que protegen un sitio web)
 --- pip install wafw00f
 --- URL: https://github.com/EnableSecurity/wafw00f
 --- wafwoof -l (Lista todos los firewalls capaces de ser detectados)
 --- wafwoof <url> 
 --- Nos aparecerá el firewall asociado al url
-
-
-
 
 
 ++ Instalar herramineta RED_HAWK (Herramienta de escaneo de vulnerabilidades)
