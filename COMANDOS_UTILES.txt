@@ -47,6 +47,19 @@
 
 ++ pkg install nmap
 
+++ Instalar herramineta DarkFly Tool (Gestor para descargar herramientas)
+--- git clone https://github.com/Ranginang67/DarkFly-Tool
+--- ls
+--- cd <directorio>
+--- chmod +x install.py
+--- python2 install.py
+--- Darkfly 
+--- Escojer la opción 1 (show all tools)
+--- Saldrá un menú con todas las herramientas que podemos instalar +500 
+--- Escoger cualquiera de ellas, por ejemplo: nmap (34)
+--- E ---> Para salir
+
+
 
 ++ Instalar herramienta OWSCAN
 --- git clone https://github.com/gameye98/owscan
