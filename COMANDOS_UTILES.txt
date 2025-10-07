@@ -14,3 +14,8 @@
 
 ++ pkg install cmatrix (Permite instalar el paquete cmatrix, otro programa de prueba)
 
+++ pkg install termux-api (Instalar API y probarla)
+--- termux-brightness 
+--- termux-battery-status
+--- termux-camara-info
+--- termux-camara-photo -c <num_camara> <nombre_archivo>
