@@ -47,6 +47,18 @@
 
 ++ pkg install nmap
 
+
+++ Instalar herramineta RED_HAWK (Herramienta de escaneo de vulnerabilidades)
+--- URL: https://github.com/Tuhinshubhra/RED_HAWK
+--- cd <directorio>
+--- chmod +x rhawk.php
+--- php rhawk.php
+--- Ingresar la url a escanear:
+--- Escojer la opción http (1) o https (2)
+--- Escojer la opción 1 (basic recon)
+
+
+
 ++ Instalar herramineta DarkFly Tool (Gestor para descargar herramientas)
 --- git clone https://github.com/Ranginang67/DarkFly-Tool
 --- ls
