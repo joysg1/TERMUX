@@ -14,6 +14,8 @@
 
 ++ pkg install cmatrix (Permite instalar el paquete cmatrix, otro programa de prueba)
 
+++ pkg install vim (Permite instalar el editor de texto vim)
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
@@ -22,3 +24,4 @@
 --- termux-location -p passive -r last (Permite ver la útlima ubicación del dispositivo)
 --- termux-sensor -l (Permite listar todos los sensores)
 --- termux-telephony-deviceinfo (Permite ver la información del teléfono)
+--- 
