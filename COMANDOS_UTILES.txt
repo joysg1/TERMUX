@@ -20,4 +20,5 @@
 --- termux-camara-info
 --- termux-camara-photo -c <num_camara> <nombre_archivo>
 --- termux-location -p passive -r last (Permite ver la útlima ubicación del dispositivo)
+--- termux-sensor -l (Permite listar todos los sensores)
 --- 
