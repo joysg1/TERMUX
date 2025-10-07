@@ -18,6 +18,14 @@
 
 ++ pkg install nano (Permite instalar el editor de texto nano)
 
+++ pkg install apache2 
+--- cd /files/usr/share/apache2/default-site/htdocs
+--- ls
+--- cat index.html ----> Documento html por defecto
+--- apachectl start ----> Permite iniciar el servidor apache
+--- ifconfig
+--- Usuar la ip dada en un navegador para acceder al servidor apache
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
@@ -26,4 +34,4 @@
 --- termux-location -p passive -r last (Permite ver la útlima ubicación del dispositivo)
 --- termux-sensor -l (Permite listar todos los sensores)
 --- termux-telephony-deviceinfo (Permite ver la información del teléfono)
---- 
+
