@@ -16,6 +16,8 @@
 
 ++ pkg install vim (Permite instalar el editor de texto vim)
 
+++ pkg install nano (Permite instalar el editor de texto nano)
+
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
 --- termux-battery-status
