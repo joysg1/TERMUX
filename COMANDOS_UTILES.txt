@@ -25,6 +25,7 @@
 --- apachectl start ----> Permite iniciar el servidor apache
 --- ifconfig
 --- Usuar la ip dada en un navegador para acceder al servidor apache
+---- Ejemplo: 192.168.2.55:8080 
 
 ++ pkg install termux-api (Instalar API y probarla)
 --- termux-brightness 
