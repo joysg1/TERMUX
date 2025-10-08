@@ -67,9 +67,12 @@
 --- cowsay -f dragon 1
 --- cowsay -f eyes 1
 
-++ pkg install tree ---> Permite ver la estructura de los directorios usando un árbol
+++ pkg install tree ---> (Permite ver la estructura de los directorios usando un árbol)
 --- tree 
 
+++ pkg install asciinema  ---> (Permite grabar la pantalla de termux)
+--- asciinema rec <nombre_archivo>
+--- Para parar la grabación escribir exit y enter
 
 ++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
 --- URL: https://github.com/Cabbagec/termux-ohmyzsh
