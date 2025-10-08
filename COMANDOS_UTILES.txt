@@ -146,4 +146,7 @@
 --- termux-location -p passive -r last (Permite ver la útlima ubicación del dispositivo)
 --- termux-sensor -l (Permite listar todos los sensores)
 --- termux-telephony-deviceinfo (Permite ver la información del teléfono)
+--- termux-tts-engines
+---- termux-tts-speak
+---- Ingresar el texto que se quiere pronunciar
 
