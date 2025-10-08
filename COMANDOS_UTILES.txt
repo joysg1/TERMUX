@@ -69,7 +69,8 @@
 --- Enter
 --- Indicar el tamaño de la fuente
 --- Enter
---- Entrar nuevamente al menú: ~/.termux/colors.sh
+--- Entrar nuevamente al menú (color): ~/.termux/colors.sh
+--- Entrar nuevamente al menú (fuentes): ~/.termux/fonts.sh
 
 
 ++ Instalar herramienta lazymux (Permite instalar otras herramientas como: metasploit, sqlmap, nmap, etc)
