@@ -59,6 +59,19 @@
 ++ pkg install nmap
 
 
+++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
+--- URL: https://github.com/Cabbagec/termux-ohmyzsh
+--- cd <directorio>
+--- ls
+--- chmod +x install.sh
+--- ./install.sh
+--- Seleccionar el tema que se desee 
+--- Enter
+--- Indicar el tamaño de la fuente
+--- Enter
+--- Entrar nuevamente al menú: ~/.termux/colors.sh
+
+
 ++ Instalar herramienta lazymux (Permite instalar otras herramientas como: metasploit, sqlmap, nmap, etc)
 --- URL: https://github.com/Gameye98/Lazymux
 --- cd <directorio>
