@@ -18,6 +18,17 @@
 
 ++ pkg install nano (Permite instalar el editor de texto nano)
 
+++ apt install figlet (Permite poner un mensaje personalizado al inicio de la terminal)
+--- cd usr
+--- cd etc
+--- rm -rf motd
+--- nano bash.bashrc
+--- Al final del archivo colocar: figlet -f standard <mensaje_personalizado>
+--- Ctrl + X
+--- y
+--- Enter
+
+
 ++ pkg install apache2 
 --- cd /files/usr/share/apache2/default-site/htdocs
 --- ls
