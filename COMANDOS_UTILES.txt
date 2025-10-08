@@ -62,6 +62,11 @@
 --- tty-clock -help
 --- tty-clock 
 
+++ pkg install cowsay ---> (Permite realizar dibujos usando caracteres)
+--- cowsay -help
+--- cowsay -f dragon 1
+--- cowsay -f eyes 1
+
 
 ++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
 --- URL: https://github.com/Cabbagec/termux-ohmyzsh
