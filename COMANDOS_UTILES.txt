@@ -58,6 +58,10 @@
 
 ++ pkg install nmap
 
+++ pkg install tty-clock ---> (Permite mostar un reloj de forma personalizada)
+--- tty-clock -help
+--- tty-clock 
+
 
 ++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
 --- URL: https://github.com/Cabbagec/termux-ohmyzsh
