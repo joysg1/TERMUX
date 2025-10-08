@@ -73,6 +73,7 @@
 ++ pkg install asciinema  ---> (Permite grabar la pantalla de termux)
 --- asciinema rec <nombre_archivo>
 --- Para parar la grabación escribir exit y enter
+--- asciinema play <nombre_archivo> ---> (Permite ver la grabación)
 
 ++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
 --- URL: https://github.com/Cabbagec/termux-ohmyzsh
