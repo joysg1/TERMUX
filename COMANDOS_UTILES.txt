@@ -67,6 +67,9 @@
 --- cowsay -f dragon 1
 --- cowsay -f eyes 1
 
+++ pkg install tree ---> Permite ver la estructura de los directorios usando un árbol
+--- tree 
+
 
 ++ Instalar herramineta termux-ohmyzsh (Permite personalizar termux)
 --- URL: https://github.com/Cabbagec/termux-ohmyzsh
