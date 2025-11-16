@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa de Termux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a237e, #283593, #3949ab);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,245,245,0.95));
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        h1 {
+            color: #1a237e;
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #5c6bc0;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        /* Estilos del buscador */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 18px 60px 18px 25px;
+            font-size: 1.1rem;
+            border: 3px solid #5c6bc0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(92, 107, 192, 0.3);
+            background: white;
+        }
+        
+        .search-box:focus {
+            border-color: #3949ab;
+            box-shadow: 0 6px 20px rgba(57, 73, 171, 0.4);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5c6bc0;
+            font-size: 1.4rem;
+            transition: color 0.3s ease;
+        }
+        
+        .search-box:focus + .search-icon {
+            color: #3949ab;
+        }
+        
+        .search-results {
+            margin-top: 12px;
+            color: #5c6bc0;
+            font-size: 0.95rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin: 30px 0;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .no-results h3 {
+            color: #e53935;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #5c6bc0, #3949ab);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .category-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-header h2::before {
+            content: "🖥️";
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+        
+        .commands-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .command-item {
+            padding: 18px 25px;
+            border-bottom: 1px solid #f1f3f4;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .command-item:last-child {
+            border-bottom: none;
+        }
+        
+        .command-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .command-item::before {
+            content: "➜";
+            position: absolute;
+            left: 10px;
+            color: #5c6bc0;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .command-item:hover::before {
+            transform: translateX(3px);
+            color: #3949ab;
+        }
+        
+        .command {
+            font-family: 'Courier New', monospace;
+            background-color: #e8eaf6;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: #1a237e;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+            border-left: 4px solid #5c6bc0;
+        }
+        
+        .command-description {
+            color: #546e7a;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        .command-example {
+            background-color: #f3e5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 4px solid #8e24aa;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #6a1b9a;
+            margin: 8px 0;
+        }
+        
+        .command-steps {
+            background-color: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #1565c0;
+        }
+        
+        .step {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #1565c0;
+            font-weight: bold;
+        }
+        
+        .command-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        
+        .tag {
+            background-color: #e8eaf6;
+            color: #3949ab;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            border-radius: 3px;
+            padding: 1px 4px;
+            font-weight: 600;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .tool-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 1.3rem;
+        }
+        
+        .tool-description {
+            color: #546e7a;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .tool-installation {
+            background-color: #f1f8e9;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #689f38;
+            margin-bottom: 15px;
+        }
+        
+        .tool-usage {
+            background-color: #fff3e0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ef6c00;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: white;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .category-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .command-item {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Guía Completa de Termux</h1>
+            <p class="subtitle">Comandos esenciales y herramientas de hacking ético para Android</p>
+            
+            <!-- Buscador -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-box" placeholder="Buscar comandos, herramientas o funcionalidades...">
+                <div class="search-icon">🔍</div>
+                <div class="search-results" id="searchResults">Escribe para buscar en la guía</div>
+            </div>
+        </header>
+        
+        <div class="no-results" id="noResults">
+            <h3>No se encontraron resultados</h3>
+            <p>Intenta con otros términos de búsqueda o revisa las categorías disponibles</p>
+        </div>
+        
+        <main class="content-grid" id="contentGrid">
+            <!-- Gestión de Paquetes -->
+            <div class="category-card" data-category="paquetes gestion actualizacion instalacion">
+                <div class="category-header">
+                    <h2>Gestión de Paquetes</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg update actualizar repositorios">
+                            <div class="command">pkg update</div>
+                            <div class="command-description">Actualizar la lista de repositorios y paquetes disponibles</div>
+                            <div class="command-tags">
+                                <span class="tag">Actualización</span>
+                                <span class="tag">Repositorios</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg upgrade actualizar paquetes">
+                            <div class="command">pkg upgrade</div>
+                            <div class="command-description">Actualizar todos los paquetes instalados a sus versiones más recientes</div>
+                            <div class="command-tags">
+                                <span class="tag">Actualización</span>
+                                <span class="tag">Paquetes</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="apt update upgrade actualizar todo">
+                            <div class="command">apt update && apt upgrade</div>
+                            <div class="command-description">Actualizar repositorios y paquetes en un solo comando (equivalente a pkg)</div>
+                            <div class="command-tags">
+                                <span class="tag">Actualización</span>
+                                <span class="tag">Completo</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install instalar paquete">
+                            <div class="command">pkg install &lt;nombre_paquete&gt;</div>
+                            <div class="command-description">Instalar un paquete específico desde los repositorios</div>
+                            <div class="command-tags">
+                                <span class="tag">Instalación</span>
+                                <span class="tag">Paquetes</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg uninstall desinstalar paquete">
+                            <div class="command">pkg uninstall &lt;nombre_paquete&gt;</div>
+                            <div class="command-description">Desinstalar un paquete específico del sistema</div>
+                            <div class="command-tags">
+                                <span class="tag">Desinstalación</span>
+                                <span class="tag">Limpieza</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg search buscar paquete">
+                            <div class="command">pkg search &lt;nombre_paquete&gt;</div>
+                            <div class="command-description">Buscar un paquete en los repositorios disponibles</div>
+                            <div class="command-example">pkg search git</div>
+                            <div class="command-tags">
+                                <span class="tag">Búsqueda</span>
+                                <span class="tag">Repositorios</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Paquetes de Prueba y Entretenimiento -->
+            <div class="category-card" data-category="prueba entretenimiento diversion">
+                <div class="category-header">
+                    <h2>Paquetes de Prueba y Entretenimiento</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install sl tren diversion">
+                            <div class="command">pkg install sl</div>
+                            <div class="command-description">Instalar el paquete sl - muestra una animación de un tren cuando escribes 'sl' por error</div>
+                            <div class="command-example">sl</div>
+                            <div class="command-tags">
+                                <span class="tag">Diversión</span>
+                                <span class="tag">Animación</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install cmatrix matrix">
+                            <div class="command">pkg install cmatrix</div>
+                            <div class="command-description">Instalar el paquete cmatrix - simula la lluvia de caracteres de la película Matrix</div>
+                            <div class="command-example">cmatrix</div>
+                            <div class="command-tags">
+                                <span class="tag">Matrix</span>
+                                <span class="tag">Efectos</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install cowsay dibujos caracteres">
+                            <div class="command">pkg install cowsay</div>
+                            <div class="command-description">Instalar cowsay - crea dibujos ASCII con mensajes personalizados</div>
+                            <div class="command-example">cowsay "Hola Mundo"</div>
+                            <div class="command-example">cowsay -f dragon "Dragón"</div>
+                            <div class="command-example">cowsay -f eyes "Ojos"</div>
+                            <div class="command-tags">
+                                <span class="tag">ASCII</span>
+                                <span class="tag">Dibujos</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install tty-clock reloj terminal">
+                            <div class="command">pkg install tty-clock</div>
+                            <div class="command-description">Instalar tty-clock - muestra un reloj digital en la terminal</div>
+                            <div class="command-example">tty-clock</div>
+                            <div class="command-example">tty-clock -c</div>
+                            <div class="command-tags">
+                                <span class="tag">Reloj</span>
+                                <span class="tag">Tiempo</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Editores de Texto -->
+            <div class="category-card" data-category="editores texto vim nano">
+                <div class="category-header">
+                    <h2>Editores de Texto</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install vim editor avanzado">
+                            <div class="command">pkg install vim</div>
+                            <div class="command-description">Instalar Vim - editor de texto modal muy potente y personalizable</div>
+                            <div class="command-example">vim archivo.txt</div>
+                            <div class="command-tags">
+                                <span class="tag">Editor</span>
+                                <span class="tag">Avanzado</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install nano editor simple">
+                            <div class="command">pkg install nano</div>
+                            <div class="command-description">Instalar Nano - editor de texto simple y fácil de usar</div>
+                            <div class="command-example">nano archivo.txt</div>
+                            <div class="command-tags">
+                                <span class="tag">Editor</span>
+                                <span class="tag">Simple</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Personalización de Terminal -->
+            <div class="category-card" data-category="personalizacion terminal figlet motd">
+                <div class="category-header">
+                    <h2>Personalización de Terminal</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="apt install figlet mensaje personalizado">
+                            <div class="command">apt install figlet</div>
+                            <div class="command-description">Instalar Figlet - crea mensajes de texto en formato ASCII art</div>
+                            <div class="command-steps">
+                                <div class="step">cd /usr/etc</div>
+                                <div class="step">rm -rf motd</div>
+                                <div class="step">nano bash.bashrc</div>
+                                <div class="step">Agregar al final: <strong>figlet -f standard "Tu Mensaje"</strong></div>
+                                <div class="step">Ctrl + X, Y, Enter para guardar</div>
+                            </div>
+                            <div class="command-tags">
+                                <span class="tag">Personalización</span>
+                                <span class="tag">ASCII Art</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install tree estructura directorios">
+                            <div class="command">pkg install tree</div>
+                            <div class="command-description">Instalar Tree - muestra la estructura de directorios en forma de árbol</div>
+                            <div class="command-example">tree</div>
+                            <div class="command-tags">
+                                <span class="tag">Estructura</span>
+                                <span class="tag">Directorios</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Servidor Web -->
+            <div class="category-card" data-category="servidor web apache">
+                <div class="category-header">
+                    <h2>Servidor Web Apache</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install apache2 servidor web">
+                            <div class="command">pkg install apache2</div>
+                            <div class="command-description">Instalar servidor web Apache</div>
+                            <div class="command-steps">
+                                <div class="step">cd $PREFIX/share/apache2/default-site/htdocs</div>
+                                <div class="step">ls (ver archivos)</div>
+                                <div class="step">cat index.html (ver HTML por defecto)</div>
+                                <div class="step">apachectl start (iniciar servidor)</div>
+                                <div class="step">ifconfig (ver IP)</div>
+                                <div class="step">Acceder desde navegador: 192.168.x.x:8080</div>
+                            </div>
+                            <div class="command-tags">
+                                <span class="tag">Servidor</span>
+                                <span class="tag">Web</span>
+                                <span class="tag">Apache</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Lenguajes de Programación -->
+            <div class="category-card" data-category="lenguajes programacion python php perl ruby">
+                <div class="category-header">
+                    <h2>Lenguajes de Programación</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install python python3">
+                            <div class="command">pkg install python</div>
+                            <div class="command-description">Instalar Python 3</div>
+                            <div class="command-example">python --version</div>
+                            <div class="command-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Programación</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install python2 version antigua">
+                            <div class="command">pkg install python2</div>
+                            <div class="command-description">Instalar Python 2 (necesario para algunos scripts antiguos)</div>
+                            <div class="command-example">python2 --version</div>
+                            <div class="command-tags">
+                                <span class="tag">Python2</span>
+                                <span class="tag">Legacy</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install php lenguaje web">
+                            <div class="command">pkg install php</div>
+                            <div class="command-description">Instalar PHP - lenguaje de programación para desarrollo web</div>
+                            <div class="command-example">php --version</div>
+                            <div class="command-tags">
+                                <span class="tag">PHP</span>
+                                <span class="tag">Web</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install perl lenguaje script">
+                            <div class="command">pkg install perl</div>
+                            <div class="command-description">Instalar Perl - lenguaje de scripting versátil</div>
+                            <div class="command-example">perl --version</div>
+                            <div class="command-tags">
+                                <span class="tag">Perl</span>
+                                <span class="tag">Scripting</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install ruby lenguaje programacion">
+                            <div class="command">pkg install ruby</div>
+                            <div class="command-description">Instalar Ruby - lenguaje de programación dinámico</div>
+                            <div class="command-example">ruby --version</div>
+                            <div class="command-tags">
+                                <span class="tag">Ruby</span>
+                                <span class="tag">Programación</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install clang c c++ compilador">
+                            <div class="command">pkg install clang</div>
+                            <div class="command-description">Instalar Clang - compilador para C y C++</div>
+                            <div class="command-tags">
+                                <span class="tag">C</span>
+                                <span class="tag">C++</span>
+                                <span class="tag">Compilador</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Herramientas de Desarrollo -->
+            <div class="category-card" data-category="desarrollo herramientas git nmap">
+                <div class="category-header">
+                    <h2>Herramientas de Desarrollo</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install git control versiones">
+                            <div class="command">pkg install git</div>
+                            <div class="command-description">Instalar Git - sistema de control de versiones</div>
+                            <div class="command-tags">
+                                <span class="tag">Git</span>
+                                <span class="tag">Control Versiones</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install nmap escaneo red">
+                            <div class="command">pkg install nmap</div>
+                            <div class="command-description">Instalar Nmap - herramienta de exploración de red y escáner de seguridad</div>
+                            <div class="command-tags">
+                                <span class="tag">Red</span>
+                                <span class="tag">Seguridad</span>
+                                <span class="tag">Escaneo</span>
+                            </div>
+                        </li>
+                        <li class="command-item" data-search="pkg install asciinema grabacion terminal">
+                            <div class="command">pkg install asciinema</div>
+                            <div class="command-description">Instalar Asciinema - graba y reproduce sesiones de terminal</div>
+                            <div class="command-example">asciinema rec sesion.cast</div>
+                            <div class="command-example">asciinema play sesion.cast</div>
+                            <div class="command-tags">
+                                <span class="tag">Grabación</span>
+                                <span class="tag">Terminal</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Termux API -->
+            <div class="category-card" data-category="api termux dispositivo hardware">
+                <div class="category-header">
+                    <h2>Termux API</h2>
+                </div>
+                <div class="category-content">
+                    <ul class="commands-list">
+                        <li class="command-item" data-search="pkg install termux-api hardware dispositivo">
+                            <div class="command">pkg install termux-api</div>
+                            <div class="command-description">Instalar Termux API - acceso a funciones del dispositivo Android</div>
+                            <div class="command-example">termux-brightness 255</div>
+                            <div class="command-example">termux-battery-status</div>
+                            <div class="command-example">termux-camera-photo -c 0 foto.jpg</div>
+                            <div class="command-example">termux-location -p passive -r last</div>
+                            <div class="command-example">termux-sensor -l</div>
+                            <div class="command-example">termux-telephony-deviceinfo</div>
+                            <div class="command-example">termux-tts-speak "Hola mundo"</div>
+                            <div class="command-tags">
+                                <span class="tag">API</span>
+                                <span class="tag">Hardware</span>
+                                <span class="tag">Dispositivo</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Herramientas de Hacking Ético -->
+        <h2 style="color: white; text-align: center; margin: 50px 0 30px 0; font-size: 2rem;">Herramientas de Hacking Ético</h2>
+        
+        <div class="content-grid">
+            <!-- Termux OhMyZsh -->
+            <div class="tool-card" data-category="personalizacion terminal zsh tema">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">ZSH</div>
+                    <div class="tool-name">Termux OhMyZsh</div>
+                </div>
+                <div class="tool-description">
+                    Personaliza tu terminal Termux con temas y configuraciones de Zsh para mejorar la productividad y apariencia.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/Cabbagec/termux-ohmyzsh</div>
+                    <div class="command">cd termux-ohmyzsh</div>
+                    <div class="command">chmod +x install.sh</div>
+                    <div class="command">./install.sh</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    • Selecciona el tema deseado<br>
+                    • Configura el tamaño de fuente<br>
+                    • Personaliza colores: <span class="command">~/.termux/colors.sh</span><br>
+                    • Personaliza fuentes: <span class="command">~/.termux/fonts.sh</span>
+                </div>
+            </div>
+            
+            <!-- Lazymux -->
+            <div class="tool-card" data-category="automatizacion herramientas hacking">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #FF9800, #EF6C00);">LM</div>
+                    <div class="tool-name">Lazymux</div>
+                </div>
+                <div class="tool-description">
+                    Instalador automatizado de herramientas de hacking ético como Metasploit, SQLMap, Nmap y muchas más.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/Gameye98/Lazymux</div>
+                    <div class="command">cd Lazymux</div>
+                    <div class="command">chmod +x lazymux.py</div>
+                    <div class="command">python lazymux.py</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    • Opción 1: Information Gathering<br>
+                    • Opción 3: Web Hacking Tools<br>
+                    • Opción 8: Exploitation Tools<br>
+                    • 00: Volver al menú anterior
+                </div>
+            </div>
+            
+            <!-- WafW00f -->
+            <div class="tool-card" data-category="web firewall deteccion seguridad">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #9C27B0, #6A1B9A);">WAF</div>
+                    <div class="tool-name">WafW00f</div>
+                </div>
+                <div class="tool-description">
+                    Detecta y identifica firewalls de aplicaciones web (WAF) que protegen sitios web.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">pip install wafw00f</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">wafw00f -l</div>
+                    <div class="command">wafw00f https://ejemplo.com</div>
+                </div>
+            </div>
+            
+            <!-- RED HAWK -->
+            <div class="tool-card" data-category="escaneo vulnerabilidades web">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #F44336, #C62828);">RH</div>
+                    <div class="tool-name">RED HAWK</div>
+                </div>
+                <div class="tool-description">
+                    Herramienta completa de escaneo de vulnerabilidades y recopilación de información para sitios web.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/Tuhinshubhra/RED_HAWK</div>
+                    <div class="command">cd RED_HAWK</div>
+                    <div class="command">chmod +x rhawk.php</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">php rhawk.php</div>
+                    • Ingresa URL del sitio<br>
+                    • Selecciona HTTP/HTTPS<br>
+                    • Opción 0: Basic Recon
+                </div>
+            </div>
+            
+            <!-- DarkFly Tool -->
+            <div class="tool-card" data-category="gestor herramientas hacking">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #607D8B, #455A64);">DF</div>
+                    <div class="tool-name">DarkFly Tool</div>
+                </div>
+                <div class="tool-description">
+                    Gestor que permite instalar más de 500 herramientas de hacking ético desde un menú interactivo.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/Ranginang67/DarkFly-Tool</div>
+                    <div class="command">cd DarkFly-Tool</div>
+                    <div class="command">chmod +x install.py</div>
+                    <div class="command">python2 install.py</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">Darkfly</div>
+                    • Opción 1: Show all tools<br>
+                    • Selecciona número de herramienta<br>
+                    • E: Salir
+                </div>
+            </div>
+            
+            <!-- OWSCAN -->
+            <div class="tool-card" data-category="escaneo web informacion">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #2196F3, #1565C0);">OS</div>
+                    <div class="tool-name">OWSCAN</div>
+                </div>
+                <div class="tool-description">
+                    Escáner web que proporciona información completa sobre un sitio: traceroute, puertos, whois, transferencia de zona.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/gameye98/owscan</div>
+                    <div class="command">cd owscan</div>
+                    <div class="command">chmod +x owscan.php</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">php owscan.php</div>
+                    • Ingresa URL a escanear<br>
+                    • Obtén información completa del sitio
+                </div>
+            </div>
+            
+            <!-- HTTrack -->
+            <div class="tool-card" data-category="clonado web sitio espejo">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">HT</div>
+                    <div class="tool-name">HTTrack</div>
+                </div>
+                <div class="tool-description">
+                    Clona sitios web completos para visualización offline, creando un espejo local del sitio.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">git clone https://github.com/Hax4us/httrack_In_termux</div>
+                    <div class="command">cd httrack_In_termux</div>
+                    <div class="command">chmod +x httrack</div>
+                    <div class="command">pkg install httrack</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">httrack</div>
+                    • Nombre del proyecto<br>
+                    • URL del sitio web<br>
+                    • Opción 1: Mirror Web Site
+                </div>
+            </div>
+            
+            <!-- NsLookUp -->
+            <div class="tool-card" data-category="dns consulta ip">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #FFC107, #FF8F00);">NS</div>
+                    <div class="tool-name">NsLookUp</div>
+                </div>
+                <div class="tool-description">
+                    Consulta información DNS y obtiene la dirección IP de un sitio web.
+                </div>
+                <div class="tool-installation">
+                    <strong>Instalación:</strong><br>
+                    <div class="command">pkg install dnsutils</div>
+                </div>
+                <div class="tool-usage">
+                    <strong>Uso:</strong><br>
+                    <div class="command">nslookup ejemplo.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p>⚠️ <strong>Nota importante:</strong> Estas herramientas deben usarse únicamente para hacking ético y en entornos autorizados.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const noResults = document.getElementById('noResults');
+            const contentGrid = document.getElementById('contentGrid');
+            const categoryCards = document.querySelectorAll('.category-card');
+            const commandItems = document.querySelectorAll('.command-item');
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            // Función para realizar la búsqueda
+            function performSearch(searchTerm) {
+                searchTerm = searchTerm.toLowerCase().trim();
+                let foundCount = 0;
+                
+                // Si el término de búsqueda está vacío, mostrar todo
+                if (searchTerm === '') {
+                    categoryCards.forEach(card => card.classList.remove('hidden'));
+                    commandItems.forEach(item => {
+                        item.classList.remove('hidden');
+                        // Remover resaltado
+                        const command = item.querySelector('.command');
+                        const description = item.querySelector('.command-description');
+                        if (command) command.innerHTML = command.textContent;
+                        if (description) description.innerHTML = description.textContent;
+                    });
+                    toolCards.forEach(card => card.classList.remove('hidden'));
+                    noResults.style.display = 'none';
+                    searchResults.textContent = 'Escribe para buscar en la guía';
+                    return;
+                }
+                
+                // Buscar en tarjetas de categoría
+                categoryCards.forEach(card => {
+                    const category = card.getAttribute('data-category') || '';
+                    if (category.includes(searchTerm)) {
+                        card.classList.remove('hidden');
+                        foundCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Buscar en elementos de comando
+                commandItems.forEach(item => {
+                    const searchData = item.getAttribute('data-search') || '';
+                    const command = item.querySelector('.command');
+                    const description = item.querySelector('.command-description');
+                    
+                    if (searchData.includes(searchTerm) || 
+                        command.textContent.toLowerCase().includes(searchTerm) ||
+                        description.textContent.toLowerCase().includes(searchTerm)) {
+                        
+                        item.classList.remove('hidden');
+                        foundCount++;
+                        
+                        // Resaltar el término de búsqueda
+                        if (command) {
+                            command.innerHTML = highlightText(command.textContent, searchTerm);
+                        }
+                        if (description) {
+                            description.innerHTML = highlightText(description.textContent, searchTerm);
+                        }
+                        
+                        // Asegurarse de que la tarjeta padre sea visible
+                        const parentCard = item.closest('.category-card');
+                        if (parentCard) {
+                            parentCard.classList.remove('hidden');
+                        }
+                    } else {
+                        item.classList.add('hidden');
+                        // Remover resaltado si no coincide
+                        if (command) command.innerHTML = command.textContent;
+                        if (description) description.innerHTML = description.textContent;
+                    }
+                });
+                
+                // Buscar en tarjetas de herramientas
+                toolCards.forEach(card => {
+                    const category = card.getAttribute('data-category') || '';
+                    const name = card.querySelector('.tool-name');
+                    const description = card.querySelector('.tool-description');
+                    
+                    if (category.includes(searchTerm) || 
+                        name.textContent.toLowerCase().includes(searchTerm) ||
+                        description.textContent.toLowerCase().includes(searchTerm)) {
+                        
+                        card.classList.remove('hidden');
+                        foundCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Mostrar resultados
+                if (foundCount > 0) {
+                    noResults.style.display = 'none';
+                    searchResults.textContent = `Se encontraron ${foundCount} resultados para "${searchTerm}"`;
+                } else {
+                    noResults.style.display = 'block';
+                    searchResults.textContent = `No se encontraron resultados para "${searchTerm}"`;
+                }
+            }
+            
+            // Función para resaltar texto
+            function highlightText(text, searchTerm) {
+                if (!searchTerm) return text;
+                
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+            
+            // Event listener para el campo de búsqueda
+            searchInput.addEventListener('input', function() {
+                performSearch(this.value);
+            });
+            
+            // Event listener para la tecla Escape
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    performSearch('');
+                }
+            });
+            
+            // Focus automático en el buscador
+            searchInput.focus();
+        });
+    </script>
+</body>
+</html>
